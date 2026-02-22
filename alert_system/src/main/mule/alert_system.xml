@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/em
 		<http:request-connection host="api.openweathermap.org" port="443" protocol="HTTPS"/>
 	</http:request-config>
 	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="c1f36a6f-617c-42c3-912f-4f5f4d0658e5" >
-		<email:smtp-connection host="smtp.gmail.com" user="tejaskinge30@gmail.com" port="587" password="pvcmjpajxzyzvcrg">
+		<email:smtp-connection host="smtp.gmail.com" user="ENTER_YOUR_EMAIL" port="587" password="ENTER_APP_PASSWORD">
 			<email:properties >
 				<email:property key="mail.smtp.starttls.enable" value="true" />
 			</email:properties>
@@ -56,9 +56,9 @@ output application/java
 		</ee:transform>
 		<choice doc:name="Choice" doc:id="1fcca543-3364-4453-82f2-ec83bbc643a6" >
 			<when expression="#[payload.alert == true]">
-				<email:send doc:name="Send" doc:id="53674f54-785c-4b52-84db-06572a930d19" config-ref="Email_SMTP" fromAddress="tejaskinge29@gmail.com" subject="#['Weather Alert at your city' ++ (payload.city default 'Unknown') ]">
+				<email:send doc:name="Send" doc:id="53674f54-785c-4b52-84db-06572a930d19" config-ref="Email_SMTP" fromAddress="ENTER_YOUR_EMAIL" subject="#['Weather Alert at your city' ++ (payload.city default 'Unknown') ]">
 					<email:to-addresses >
-						<email:to-address value="tejaskinge29@gmail.com" />
+						<email:to-address value="ENTER_RECEIVER_ADDRESS" />
 					</email:to-addresses>
 					<email:body contentType="text/plain">
 						<email:content ><![CDATA[#[payload.city]]]></email:content>
@@ -71,4 +71,5 @@ output application/java
 		</choice>
 		<logger level="INFO" doc:name="Logger" doc:id="806a1112-e9f8-4ee4-a1cf-da18b926afbf" message='#["Weather checked for #[payload.city] - #[payload.condition], #[payload.temperature]°C"]'/>
 	</flow>
+
 </mule>
